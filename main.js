@@ -359,15 +359,23 @@ let arrCourse = courses.map(function (course) {
             let day = ptu.thu - 2 + ob.dayBd;
             let thang = ob.monthBd;
             let year = ob.yearbd;
-            if (ob.monthBd % 2 == 0) {
+
+            if (ob.monthBd == 2) {
+                if (day > 28) day -= 28;
+            } else if (montOfYear[ob.monthBd] % 2 == 1) {
                 // tháng có 31 ngày
-                if (day > 31) day -= 31;
-                thang = ob.monthKt;
-            } else {
+                if (day > 31) {
+                    day -= 31;
+                    thang = ob.monthKt;
+                    year = ob.yearkt;
+                }
+            } else if (montOfYear[ob.monthBd] % 2 == 0) {
                 // tháng có 30 ngày
-                if (day > 30) day -= 30;
-                thang = ob.monthKt;
-                year = ob.yearkt;
+                if (day > 30) {
+                    day -= 30;
+                    thang = ob.monthKt;
+                    year = ob.yearkt;
+                }
             }
             return {
                 day: day,
