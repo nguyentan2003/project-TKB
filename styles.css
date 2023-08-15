@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --width: calc((100% - 40px) / 7);
+}
+.main {
+    display: flex;
+    overflow: hidden;
+}
+.container {
+    width: 100%;
+    flex-shrink: 0;
+    margin-bottom: -40px;
+    /* transform: translateX(calc(1 * (-100%))); */
+}
+.month {
+    text-align: center;
+    padding: 10px;
+}
+.content {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    background-color: palegoldenrod;
+}
+.content__item {
+    width: var(--width);
+    text-align: center;
+    padding: 20px;
+}
+.content__item:hover {
+    background-color: #777;
+    border-radius: 999px;
+}
+.item-day {
+    cursor: pointer;
+    position: relative;
+    font-size: 20px;
+}
+.item-day.tick::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+    position: absolute;
+    top: 7px;
+    right: 50%;
+    transform: translateX(-50%);
+}
+.item-day-first {
+    margin-left: calc(3 * var(--width));
+}
+.notification {
+    width: 400px;
+    margin: 0 auto;
+}
+.notification__date {
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.notification__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: palegoldenrod;
+}
+.notification__item-time {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 30px;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.notification__item-time > span {
+    color: #777;
+    font-weight: 600;
+}
+.notification__item-time > span:first-child {
+    position: relative;
+}
+.notification__item-time > span:first-child::after {
+    position: absolute;
+    top: 23px;
+    left: 18px;
+    content: "";
+    display: block;
+    width: 2px;
+    height: 10px;
+    background-color: #999;
+    border-radius: 999px;
+}
+.notification__content {
+    flex-grow: 1;
+}
+.notification__name-class,
+.notification__date-time {
+    color: #777;
+}
+
+.icon-forward {
+    position: fixed;
+    top: 10px;
+
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #888;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.icon-forward-back {
+    left: 30%;
+}
+.icon-forward-next {
+    right: 30%;
+}
+.icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid orange;
+    border-right: 2px solid orange;
+}
+.icon-back {
+    rotate: 135deg;
+    left: 20px;
+}
+.icon-next {
+    rotate: -45deg;
+    right: 20px;
+}
+@media (max-width: 739px) {
+    :root {
+        --width: calc((100%) / 7);
+    }
+    .content {
+        padding: 20px 0;
+    }
+}
