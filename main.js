@@ -239,6 +239,13 @@ const $$ = document.querySelectorAll.bind(document);
 const main = $(".main");
 const items = $(".notification__items");
 const notificationDate = $(".notification__date");
+d = new Date();
+let currentDay = d.getDate();
+let currentMonth = d.getMonth() + 1;
+let currentYear = d.getFullYear();
+console.log(currentDay);
+console.log(currentMonth);
+console.log(currentYear);
 //
 let star = 1;
 let end = 12;
@@ -493,8 +500,22 @@ function xuatData(month, day) {
     });
     return bien;
 }
-let viTri = 0;
+// set Current Active
+notificationDate.innerText = `Ngày ${currentDay} tháng ${currentMonth} năm ${currentYear}`;
+if (xuatData(currentMonth, currentDay) == false) {
+    let notificationItem = document.createElement("div");
+    notificationItem.classList.add("notification__item");
+    notificationItem.innerHTML = `Hôm nay bạn không có lịch học`;
+    notificationItem.style.fontSize = "20px";
+    items.appendChild(notificationItem);
+}
+let viTri = currentMonth - 1;
 let containerElements = $$(".container");
+// set active thời gian thực
+for (i of containerElements) {
+    i.style.transform = `translateX(calc(${currentMonth - 1} * (-100%)))`;
+}
+
 $(".icon-forward-back").onclick = function () {
     viTri--;
     if (viTri == -1) viTri = 11;
