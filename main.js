@@ -221,8 +221,12 @@ Từ 01/01/2024 đến 07/01/2024:
 //
 let montOfYear = [""];
 for (let i = 1; i <= 12; i++) {
-    if (i == 2) montOfYear.push(28);
-    else if (i <= 7) {
+    if (i == 2) {
+        let d = new Date();
+        let year = d.getUTCFullYear;
+        if (Number(d) % 4 == 0) montOfYear.push(28);
+        else montOfYear.push(28);
+    } else if (i <= 7) {
         if (i % 2 == 1) montOfYear.push(31);
         else montOfYear.push(30);
     } else {
@@ -231,7 +235,7 @@ for (let i = 1; i <= 12; i++) {
     }
 }
 
-console.log(montOfYear);
+// console.log(montOfYear);
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -243,89 +247,99 @@ d = new Date();
 let currentDay = d.getDate();
 let currentMonth = d.getMonth() + 1;
 let currentYear = d.getFullYear();
-console.log(currentDay);
-console.log(currentMonth);
-console.log(currentYear);
+// console.log(currentDay);
+// console.log(currentMonth);
+// console.log(currentYear);
 //
-let star = 1;
-let end = 12;
+
 let variable = 6;
-for (let index = star; index <= end; index++) {
-    let container = document.createElement("div");
-    container.classList.add("container");
-    // add tháng
-    let month = document.createElement("div");
-    month.classList.add("month");
-    month.innerHTML = `<div class="month">Tháng ${index}</div>`;
-    container.appendChild(month);
-    // add các ngày
-    let content = document.createElement("div");
-    content.classList.add("content");
-    content.setAttribute("data", `${index}`);
-    content.innerHTML = `
-   <span class="content__item item-date">Mon</span>
-   <span class="content__item item-date">Tue</span>
-   <span class="content__item item-date">Wed</span>
-   <span class="content__item item-date">Thu</span>
-   <span class="content__item item-date">Fri</span>
-   <span class="content__item item-date">Sat</span>
-   <span class="content__item item-date">Sun</span>
+for (let yearItem = 2023; yearItem <= 2025; yearItem++) {
+    let star = 1;
+    let end = 12;
+    for (let index = star; index <= end; index++) {
+        let container = document.createElement("div");
+        container.classList.add("container");
+        // add tháng
+        let month = document.createElement("div");
+        month.classList.add("month");
+        month.innerHTML = `<div class="month">Tháng ${index} Năm ${yearItem}</div>`;
+        container.appendChild(month);
+        // add các ngày
+        let content = document.createElement("div");
+        content.classList.add("content");
+        content.setAttribute("data", `${index}`);
+        content.innerHTML = `
+       <span class="content__item item-date">Mon</span>
+       <span class="content__item item-date">Tue</span>
+       <span class="content__item item-date">Wed</span>
+       <span class="content__item item-date">Thu</span>
+       <span class="content__item item-date">Fri</span>
+       <span class="content__item item-date">Sat</span>
+       <span class="content__item item-date">Sun</span>
+    
+       <span class="content__item item-day item-day-first">1</span>
+       <span class="content__item item-day ">2</span>
+       <span class="content__item item-day">3</span>
+       <span class="content__item item-day">4</span>
+       <span class="content__item item-day">5</span>
+       <span class="content__item item-day">6</span>
+       <span class="content__item item-day">7</span>
+       <span class="content__item item-day">8</span>
+       <span class="content__item item-day">9</span>
+       <span class="content__item item-day">10</span>
+       <span class="content__item item-day">11</span>
+       <span class="content__item item-day">12</span>
+       <span class="content__item item-day">13</span>
+       <span class="content__item item-day">14</span>
+       <span class="content__item item-day">15</span>
+       <span class="content__item item-day">16</span>
+       <span class="content__item item-day">17</span>
+       <span class="content__item item-day">18</span>
+       <span class="content__item item-day">19</span>
+       <span class="content__item item-day">20</span>
+       <span class="content__item item-day">21</span>
+       <span class="content__item item-day">22</span>
+       <span class="content__item item-day">23</span>
+       <span class="content__item item-day">24</span>
+       <span class="content__item item-day">25</span>
+       <span class="content__item item-day">26</span>
+       <span class="content__item item-day">27</span>
+       <span class="content__item item-day">28</span>
+       <span class="content__item item-day month28">29</span>
+       <span class="content__item item-day month28 month29">30</span> 
+       `;
+        let dem = variable;
+        if (index == 2) {
+            if (montOfYear[index] == 28) {
+                let removeSpan = content.querySelectorAll(".month28");
+                for (let i of removeSpan) {
+                    i.remove();
+                }
+            } else if (montOfYear[index] == 29) {
+                let removeSpan = content.querySelector(".month29");
+                removeSpan.remove();
+                variable++;
+            }
+        } else if (montOfYear[index] % 2 == 1) {
+            let span = document.createElement("span");
+            span.classList.add("content__item", "item-day");
+            span.innerText = "31";
+            content.appendChild(span);
+            // biến số ô trống trước phn tử ngày 1
+            variable += 3;
+        } else variable += 2;
 
-   <span class="content__item item-day item-day-first">1</span>
-   <span class="content__item item-day ">2</span>
-   <span class="content__item item-day">3</span>
-   <span class="content__item item-day">4</span>
-   <span class="content__item item-day">5</span>
-   <span class="content__item item-day">6</span>
-   <span class="content__item item-day">7</span>
-   <span class="content__item item-day">8</span>
-   <span class="content__item item-day">9</span>
-   <span class="content__item item-day">10</span>
-   <span class="content__item item-day">11</span>
-   <span class="content__item item-day">12</span>
-   <span class="content__item item-day">13</span>
-   <span class="content__item item-day">14</span>
-   <span class="content__item item-day">15</span>
-   <span class="content__item item-day">16</span>
-   <span class="content__item item-day">17</span>
-   <span class="content__item item-day">18</span>
-   <span class="content__item item-day">19</span>
-   <span class="content__item item-day">20</span>
-   <span class="content__item item-day">21</span>
-   <span class="content__item item-day">22</span>
-   <span class="content__item item-day">23</span>
-   <span class="content__item item-day">24</span>
-   <span class="content__item item-day">25</span>
-   <span class="content__item item-day">26</span>
-   <span class="content__item item-day">27</span>
-   <span class="content__item item-day">28</span>
-   <span class="content__item item-day month2">29</span>
-   <span class="content__item item-day month2">30</span> 
-   `;
-    let dem = variable;
-    if (montOfYear[index] == 28) {
-        let removeSpan = content.querySelectorAll(".month2");
-        for (let i of removeSpan) {
-            i.remove();
-        }
-    } else if (montOfYear[index] % 2 == 1) {
-        let span = document.createElement("span");
-        span.classList.add("content__item", "item-day");
-        span.innerText = "31";
-        content.appendChild(span);
-        // biến số ô trống trước phn tử ngày 1
-        variable += 3;
-    } else variable += 2;
+        container.appendChild(content);
+        main.appendChild(container);
 
-    container.appendChild(content);
-    main.appendChild(container);
-
-    var itemFirst = content.querySelector(".item-day-first");
-    itemFirst.style.marginLeft = `calc( ${dem}* var(--width))`;
-    // set lại đếm
-    if (variable > 6) variable -= 7;
-    //
+        var itemFirst = content.querySelector(".item-day-first");
+        itemFirst.style.marginLeft = `calc( ${dem}* var(--width))`;
+        // set lại đếm
+        if (variable > 6) variable -= 7;
+        //
+    }
 }
+
 let arrCourse = courses.map(function (course) {
     let info = course.info;
     let weeks = info.split("Từ");
@@ -408,12 +422,20 @@ let arrCourse = courses.map(function (course) {
         let valueDay = Number(itemDay.innerText);
         let contentElement = itemDay.parentElement;
         let valueMonth = Number(contentElement.getAttribute("data"));
-        let valueYear = 2023;
+        let element = itemDay.parentElement.parentElement.innerText;
+        let vt = element.indexOf("202");
+        let valueYear = element.slice(vt, vt + 4);
+        valueYear = Number(valueYear);
+
         // render ra chấm xanh
         arrCourse.forEach(function (course) {
             course.info.forEach(function (week) {
                 week.forEach(function (ob) {
-                    if (ob.month == valueMonth && valueDay == ob.day) {
+                    if (
+                        ob.month == valueMonth &&
+                        valueDay == ob.day &&
+                        valueYear == ob.year
+                    ) {
                         itemDay.classList.add("tick");
                     }
                 });
@@ -425,14 +447,15 @@ let arrCourse = courses.map(function (course) {
             for (let i of arrElement) {
                 i.remove();
             }
-            if (valueMonth == 1) valueYear = 2024;
+
             notificationDate.innerText = `Ngày ${valueDay} tháng ${valueMonth} năm ${valueYear}`;
 
-            if (xuatData(valueMonth, valueDay) == false) {
+            if (xuatData(valueMonth, valueDay, valueYear) == false) {
                 let notificationItem = document.createElement("div");
                 notificationItem.classList.add("notification__item");
-                notificationItem.innerHTML = `Hôm nay bạn không có lịch học`;
+                notificationItem.innerText = `Hôm nay bạn không có lịch học`;
                 notificationItem.style.fontSize = "20px";
+
                 items.appendChild(notificationItem);
             }
         };
@@ -450,12 +473,12 @@ let arrCourse = courses.map(function (course) {
 //     });
 // }
 
-function xuatData(month, day) {
+function xuatData(month, day, year) {
     let bien = false;
     arrCourse.forEach(function (course) {
         course.info.forEach(function (week) {
             week.forEach(function (ob) {
-                if (ob.month == month && day == ob.day) {
+                if (ob.month == month && day == ob.day && year == ob.year) {
                     let notificationItem = document.createElement("div");
                     notificationItem.classList.add("notification__item");
 
@@ -518,15 +541,27 @@ for (i of containerElements) {
 
 $(".icon-forward-back").onclick = function () {
     viTri--;
-    if (viTri == -1) viTri = 11;
+    // if (viTri == -1) viTri = 11;
     for (i of containerElements) {
         i.style.transform = `translateX(calc(${viTri} * (-100%)))`;
     }
 };
 $(".icon-forward-next").onclick = function () {
     viTri++;
-    if (viTri == 12) viTri = 0;
+    // if (viTri == 12) viTri = 0;
     for (i of containerElements) {
         i.style.transform = `translateX(calc(${viTri} * (-100%)))`;
+    }
+};
+
+document.onscroll = function (e) {
+    let scroll = window.scrollY || document.documentElement.scrollTop;
+    if (scroll > 10) {
+        $(".icon-forward-back").style.display = "none";
+        $(".icon-forward-next").style.display = "none";
+    }
+    if (scroll < 10) {
+        $(".icon-forward-back").style.display = "flex";
+        $(".icon-forward-next").style.display = "flex";
     }
 };
