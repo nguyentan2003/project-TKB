@@ -1,4 +1,4 @@
-const courses = [
+const coursesTan = [
     {
         id: 0,
         name: "Cấu trúc dữ liệu và giải thuật-1-23 (A18C605)",
@@ -340,7 +340,7 @@ for (let yearItem = 2023; yearItem <= 2025; yearItem++) {
     }
 }
 
-let arrCourse = courses.map(function (course) {
+let arrCourse = coursesTan.map(function (course) {
     let info = course.info;
     let weeks = info.split("Từ");
     weeks.shift();
@@ -525,7 +525,7 @@ function xuatData(month, day, year) {
 }
 // set Current Active
 notificationDate.innerText = `Ngày ${currentDay} tháng ${currentMonth} năm ${currentYear}`;
-if (xuatData(currentMonth, currentDay) == false) {
+if (xuatData(currentMonth, currentDay, currentYear) == false) {
     let notificationItem = document.createElement("div");
     notificationItem.classList.add("notification__item");
     notificationItem.innerHTML = `Hôm nay bạn không có lịch học`;
